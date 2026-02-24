@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Michael Irungu Muturi – Software Engineer & DevOps</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #08090d;
+      --surface: #10121a;
+      --surface2: #181c28;
+      --accent: #00e5ff;
+      --accent2: #7c4dff;
+      --accent3: #ff6b35;
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(8,9,13,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--accent) !important;
+      letter-spacing: -0.02em;
+    }
+    .nav-link {
+      color: var(--muted) !important;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--accent) !important; }
+    .navbar-toggler { border-color: var(--border); }
+    .navbar-toggler-icon { filter: invert(1); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-role {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+    .btn-primary-custom {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-primary-custom:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+    }
+    .btn-outline-custom {
+      background: transparent;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-outline-custom:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-val {
+      font-family: 'Space Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 6rem 0; position: relative; z-index: 1; }
+    .section-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      height: 100%;
+    }
+    .about-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 2px;
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-card h5 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .about-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg); }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .skill-group-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent2);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .skill-pill {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.78rem;
+      color: var(--text);
+      margin: 0.25rem;
+      transition: all 0.2s;
+    }
+    .skill-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+    .project-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.3s;
+      height: 100%;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,229,255,0.08);
+    }
+    .project-thumb {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, var(--surface2));
+    }
+    .project-body { padding: 1.3rem; }
+    .project-tags { margin-bottom: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      background: rgba(124,77,255,0.15);
+      color: var(--accent2);
+      border: 1px solid rgba(124,77,255,0.2);
+    }
+    .project-card h5 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .project-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .project-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.7rem; color: var(--accent); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem;
+      top: 0.35rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .timeline-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-org {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-item h5 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .timeline-item ul {
+      list-style: none;
+      padding: 0;
+    }
+    .timeline-item ul li {
+      font-size: 0.83rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    .timeline-item ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── PAYMENT ── */
+    #payment { background: var(--surface); }
+    .payment-hero {
+      background: linear-gradient(135deg, var(--surface2) 0%, rgba(124,77,255,0.1) 100%);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .payment-hero h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.7rem; }
+    .payment-hero p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    .payment-methods { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .pay-method {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 100px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pay-method:hover { border-color: var(--accent); }
+    .pay-method i { font-size: 1.8rem; }
+    .pay-method span { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+    .pay-method.mpesa i { color: #00a550; }
+    .pay-method.visa i { color: #1a1f71; background: #fff; border-radius: 3px; padding: 2px 5px; }
+    .pay-method.paypal i { color: #003087; }
+    .pay-form {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+    .pay-form h5 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .form-control-custom {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .form-control-custom:focus { border-color: var(--accent); }
+    .form-control-custom::placeholder { color: var(--muted); }
+    .form-label-custom {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .payment-tab-content { display: none; }
+    .payment-tab-content.active { display: block; }
+    .service-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.2rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .service-item:hover { border-color: var(--accent2); }
+    .service-item .name { font-size: 0.9rem; font-weight: 600; }
+    .service-item .price {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--bg); }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.2s;
+      margin-bottom: 0.7rem;
+    }
+    .cert-card:hover { border-color: var(--accent2); transform: translateX(4px); }
+    .cert-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 2px;
+      background: rgba(124,77,255,0.15);
+      border: 1px solid rgba(124,77,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent2);
+      font-size: 0.95rem;
+    }
+    .cert-card span { font-size: 0.88rem; font-weight: 600; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--surface); }
+    .contact-info a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.6rem 0;
+      transition: color 0.2s;
+    }
+    .contact-info a:hover { color: var(--accent); }
+    .contact-info a i { color: var(--accent); width: 16px; }
+    .social-links { display: flex; gap: 0.7rem; margin-top: 1.5rem; }
+    .social-link {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-form input, .contact-form textarea {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+      font-family: 'Syne', sans-serif;
+      resize: none;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+    }
+    footer p {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: 'Space Mono', monospace;
+      margin: 0;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 2px; }
+
+    /* ── HIDDEN PROJECT CARD ── */
+    .project-item.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">MIM_<span style="color:var(--accent2)">DEV</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#certifications">Certs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#payment">Hire</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="hero-label">Available for freelance & consulting</div>
+        <h1 class="hero-name">
+          Michael<br>
+          <span>Irungu</span><br>
+          Muturi
+        </h1>
+        <p class="hero-role">
+          Software Engineer & DevOps Practitioner building scalable cloud-native systems, 
+          tax platforms, and mobile applications across government and enterprise environments.
+        </p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="#projects" class="btn-primary-custom">View Projects</a>
+          <a href="#payment" class="btn-outline-custom">Hire Me</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-val">4+</div>
+            <div class="stat-label">Years Exp</div>
+          </div>
+          <div>
+            <div class="stat-val">10+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div>
+            <div class="stat-val">3</div>
+            <div class="stat-label">Gov Clients</div>
+          </div>
+          <div>
+            <div class="stat-val">12+</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 d-none d-lg-flex justify-content-end">
+        <div style="position:relative">
+          <div style="width:280px;height:280px;border-radius:4px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:7rem;position:relative;overflow:hidden;">
+            👨🏾‍💻
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,0.05),rgba(124,77,255,0.05));"></div>
+          </div>
+          <div style="position:absolute;top:-12px;right:-12px;width:80px;height:80px;border:1px solid rgba(0,229,255,0.3);border-radius:2px;"></div>
+          <div style="position:absolute;bottom:-12px;left:-12px;width:50px;height:50px;background:var(--accent2);opacity:0.15;border-radius:2px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="section-eyebrow">About</div>
+        <h2 class="section-title">Building Digital Infrastructure<br>for the Real World</h2>
+        <p class="section-sub">From government tax systems to mobile PAYE filing — I engineer solutions that impact thousands of users daily.</p>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-3 fade-up">
+        <div class="about-card">
+          <div class="about-icon"><i class="fas fa-cloud"></i></div>
+          <h5>Cloud & DevOps</h5>
+          <p>AWS, GCP, Kubernetes, Terraform, Jenkins, Ansible — full infrastructure automation and CI/CD pipelines.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up">
+        <div class="about-card">
+          <div class="about-icon" style="background:rgba(124,77,255,0.1);border-color:rgba(124,77,255,0.2);color:var(--accent2)"><i class="fas fa-server"></i></div>
+          <h5>Backend Engineering</h5>
+          <p>Python/Django, Golang, REST & GraphQL APIs, secure authentication, audit logging, and microservices.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up">
+        <div class="about-card">
+          <div class="about-icon" style="background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.2);color:var(--accent3)"><i class="fas fa-mobile-alt"></i></div>
+          <h5>Mobile Development</h5>
+          <p>Flutter & Dart with Riverpod — cross-platform apps including M-Service PAYE filing integration.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up">
+        <div class="about-card">
+          <div class="about-icon"><i class="fas fa-globe"></i></div>
+          <h5>Full-Stack Web</h5>
+          <p>React, TypeScript, Next.js frontends backed by robust APIs and PostgreSQL/MongoDB databases.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="section-eyebrow">Skills</div>
+        <h2 class="section-title">Technical Arsenal</h2>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6 fade-up">
+        <div class="skill-group">
+          <div class="skill-group-title">Backend</div>
+          <span class="skill-pill">Python</span><span class="skill-pill">Django</span><span class="skill-pill">Django REST Framework</span><span class="skill-pill">Golang</span><span class="skill-pill">REST APIs</span><span class="skill-pill">GraphQL</span>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Frontend</div>
+          <span class="skill-pill">React</span><span class="skill-pill">TypeScript</span><span class="skill-pill">Next.js</span><span class="skill-pill">HTML</span><span class="skill-pill">CSS</span><span class="skill-pill">JavaScript</span>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Mobile</div>
+          <span class="skill-pill">Flutter</span><span class="skill-pill">Dart</span><span class="skill-pill">Riverpod</span><span class="skill-pill">Serverpod</span>
+        </div>
+      </div>
+      <div class="col-md-6 fade-up">
+        <div class="skill-group">
+          <div class="skill-group-title">Cloud & DevOps</div>
+          <span class="skill-pill">AWS</span><span class="skill-pill">GCP</span><span class="skill-pill">Docker</span><span class="skill-pill">Kubernetes</span><span class="skill-pill">Terraform</span><span class="skill-pill">Jenkins</span><span class="skill-pill">Ansible</span><span class="skill-pill">CI/CD Pipelines</span><span class="skill-pill">Prometheus</span><span class="skill-pill">Grafana</span>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Databases & Integrations</div>
+          <span class="skill-pill">PostgreSQL</span><span class="skill-pill">MongoDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">M-Pesa Daraja API</span><span class="skill-pill">Banking APIs</span><span class="skill-pill">iTax Integration</span>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Architecture & Tools</div>
+          <span class="skill-pill">Microservices</span><span class="skill-pill">System Design</span><span class="skill-pill">IaC</span><span class="skill-pill">Figma</span><span class="skill-pill">Git</span><span class="skill-pill">Postman</span><span class="skill-pill">Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="section-eyebrow">Projects</div>
+        <h2 class="section-title">What I've Built</h2>
+        <p class="section-sub">A selection of production-grade systems delivered for government and enterprise clients.</p>
+      </div>
+    </div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web Applications</button>
+      <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+      <button class="filter-btn" data-filter="devops">DevOps / Infra</button>
+    </div>
+    <div class="row g-4" id="projectsGrid">
+
+      <!-- KESRA Student Portal -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#0d1f3c,#1a3a6b);">🎓</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Django</span><span class="project-tag">Python</span><span class="project-tag">KRA</span></div>
+            <h5>KESRA Student Portal</h5>
+            <p>Student enrollment, fee management, document submission platform with backend integration to core KRA systems at Kenya School of Revenue Administration.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compliance Document Platform -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#1a0a2e,#3d1a6b);">🗂️</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Django</span><span class="project-tag">REST API</span><span class="project-tag">KRA</span></div>
+            <h5>Compliance Document Sharing Platform</h5>
+            <p>Secure internal knowledge sharing and document archiving system enabling cross-departmental collaboration at KRA (Level 1).</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- M-Service PAYE -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="mobile">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#0a2e1a,#1a6b3d);">📱</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">iTax</span></div>
+            <h5>M-Service PAYE Filing Module</h5>
+            <p>Mobile PAYE filing with statutory deductions, insurance relief, PWD exemptions, bulk PAYE filing, and real-time iTax validation.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- D&E BPR System -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#2e1a0a,#6b3d1a);">⚖️</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Workflow</span><span class="project-tag">KRA</span></div>
+            <h5>Debt & Enforcement BPR System</h5>
+            <p>Lead engineer for automated tax enforcement workflows — translating complex debt recovery policies into digital operations.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- County Revenue -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#0a1f2e,#1a4f6b);">💰</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Docker</span><span class="project-tag">Django</span><span class="project-tag">County Gov</span></div>
+            <h5>County Revenue Management System</h5>
+            <p>Improved revenue collection efficiency by 30% for Kiambu County. Containerized with Docker, reducing deployment time by 40%.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konza OSS -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#1a2e0a,#3d6b1a);">🌆</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Next.js</span><span class="project-tag">ICT Authority</span></div>
+            <h5>Konza OSS Platform</h5>
+            <p>Enhanced platform serving 10,000+ users with 25% operational efficiency increase at Konza Technopolis smart city.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Silicon Savannah Appstore -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#2e0a2a,#6b1a65);">🛒</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">PostgreSQL</span></div>
+            <h5>Silicon Savannah Appstore</h5>
+            <p>App marketplace platform for Konza Technopolis — increased platform engagement by 30%.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- City Food App -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="mobile">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#2e1a0a,#8b4513);">🍔</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Konza</span></div>
+            <h5>City Food App</h5>
+            <p>Smart city food distribution mobile app reducing turnaround time by 20% at Konza Technopolis.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- e-Baraza -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web mobile">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#0a2e2e,#1a6b6b);">🗣️</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Flutter</span><span class="project-tag">GovTech</span></div>
+            <h5>e-Baraza Citizen Feedback</h5>
+            <p>Digital citizen feedback platform co-developed at ICT Authority — improved feedback access by 15%.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fleet Management -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#1a1a0a,#4b4b1a);">🚗</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">Django</span><span class="project-tag">Kiambu County</span></div>
+            <h5>Fleet Management System</h5>
+            <p>UI/UX design and development for county fleet scheduling and tracking system using Figma and Django backend.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Monitoring -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web devops">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#2e0a0a,#6b1a1a);">📡</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Automation</span><span class="project-tag">ICT Authority</span></div>
+            <h5>Media Monitoring Tool</h5>
+            <p>Automated media monitoring platform improving monitoring operations efficiency by 30% at ICT Authority.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DevOps Pipeline -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="devops">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#0a0a2e,#1a1a6b);">⚙️</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Kubernetes</span><span class="project-tag">Terraform</span><span class="project-tag">Jenkins</span></div>
+            <h5>Cloud-Native CI/CD Infrastructure</h5>
+            <p>End-to-end DevOps pipeline with Kubernetes orchestration, Terraform IaC, Jenkins CI/CD, Prometheus monitoring on AWS & GCP.</p>
+            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="section-eyebrow">Experience</div>
+        <h2 class="section-title">Where I've<br>Worked</h2>
+        <p class="section-sub">Government and enterprise environments across Kenya's digital transformation landscape.</p>
+        <button class="btn-primary-custom mt-4" onclick="openExpModal()" style="display:inline-flex;align-items:center;gap:0.5rem;">
+          <i class="fas fa-plus"></i> Add Experience
+        </button>
+      </div>
+      <div class="col-lg-8">
+        <div class="timeline" id="experienceTimeline">
+
+          <div class="timeline-item fade-up">
+            <div class="timeline-date">Feb 2025 – Feb 2026</div>
+            <div class="timeline-org">Kenya Revenue Authority (KRA)</div>
+            <h5>Software Engineer – Special Assignment</h5>
+            <ul>
+              <li>Led KESRA Student Portal improvements — enrollment, fees, document submission</li>
+              <li>Designed Compliance Level 1 Document Sharing Platform for secure archiving</li>
+              <li>Built PAYE Filing Module for M-Service mobile app with iTax integration</li>
+              <li>Lead engineer for Debt & Enforcement BPR System — automated tax enforcement workflows</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item fade-up">
+            <div class="timeline-date">Nov 2024 – Dec 2024</div>
+            <div class="timeline-org">Kenya National Examinations Council (KNEC)</div>
+            <h5>Data Entry Clerk</h5>
+            <ul>
+              <li>Processed 10,000+ candidate records daily with high accuracy</li>
+              <li>Identified and corrected data inconsistencies improving database integrity</li>
+              <li>Configured LAN and switch networks for improved throughput</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item fade-up">
+            <div class="timeline-date">Nov 2023 – Nov 2024</div>
+            <div class="timeline-org">ICT Authority – Konza Technopolis</div>
+            <h5>Application & Software Developer Intern</h5>
+            <ul>
+              <li>Enhanced Konza OSS platform for 10,000+ users — 25% efficiency gain</li>
+              <li>Developed City Food App — 20% reduction in distribution turnaround</li>
+              <li>Built Silicon Savannah Appstore — 30% engagement increase</li>
+              <li>Co-developed e-Baraza citizen feedback platform</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item fade-up">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-org">Kiambu County Government</div>
+            <h5>Software Engineer</h5>
+            <ul>
+              <li>County Revenue Management System — 30% collection efficiency improvement</li>
+              <li>Containerized applications with Docker — 40% deployment time reduction</li>
+              <li>Designed Fleet Management System UI/UX with Figma</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADD EXPERIENCE MODAL -->
+<div id="expModal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;margin:1rem;animation:slideUp 0.3s ease;">
+    <div style="padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+      <h5 style="margin:0;font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:0.5rem;">
+        <span style="color:var(--accent)"><i class="fas fa-briefcase"></i></span> Add New Experience
+      </h5>
+      <button onclick="closeExpModal()" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+    <div style="padding:1.5rem 2rem;">
+      <div style="margin-bottom:1rem;">
+        <label class="form-label-custom">Job Title *</label>
+        <input type="text" id="exp_title" class="form-control-custom" placeholder="e.g. Senior Software Engineer"/>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label class="form-label-custom">Organisation / Company *</label>
+        <input type="text" id="exp_org" class="form-control-custom" placeholder="e.g. Safaricom PLC"/>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
+        <div>
+          <label class="form-label-custom">Start Date *</label>
+          <input type="text" id="exp_start" class="form-control-custom" placeholder="e.g. Jan 2026"/>
+        </div>
+        <div>
+          <label class="form-label-custom">End Date</label>
+          <input type="text" id="exp_end" class="form-control-custom" placeholder="e.g. Present"/>
+        </div>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <label class="form-label-custom">Key Responsibilities / Achievements</label>
+        <textarea id="exp_bullets" class="form-control-custom" rows="5" placeholder="• One bullet point per line&#10;• e.g. Built API integration with M-Pesa Daraja&#10;• e.g. Reduced deployment time by 40%"></textarea>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;">Each line will be displayed as a separate bullet point.</div>
+      </div>
+      <div style="display:flex;gap:0.8rem;">
+        <button class="btn-primary-custom" onclick="addExperience()" style="flex:1;text-align:center;">
+          <i class="fas fa-plus me-2"></i>Add to Timeline
+        </button>
+        <button onclick="closeExpModal()" style="background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.85rem 1.5rem;border-radius:2px;cursor:pointer;font-size:0.85rem;font-weight:700;letter-spacing:0.05em;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--muted)'" onmouseout="this.style.borderColor='var(--border)'">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  #expModal.open { display:flex !important; }
+  .form-control-custom { background:var(--surface); border:1px solid var(--border); border-radius:2px; color:var(--text); padding:0.75rem 1rem; font-size:0.88rem; width:100%; outline:none; transition:border-color 0.2s; margin-bottom:0; font-family:'Syne',sans-serif; resize:vertical; }
+  .form-control-custom:focus { border-color:var(--accent); }
+  .form-control-custom::placeholder { color:var(--muted); }
+</style>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="section-eyebrow">Certifications</div>
+        <h2 class="section-title">Credentials & Education</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="section-eyebrow mb-3">Education</div>
+        <div class="cert-card">
+          <div class="cert-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div>
+            <span>BSc Computer Science – Laikipia University</span>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">2018–2022 · Second Class Honours (Upper)</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span>Holberton School – Software Engineering</span>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Aug 2024–May 2025 · Backend Specialization</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon"><i class="fas fa-cogs"></i></div>
+          <div>
+            <span>IBT Learning – DevOps Engineering</span>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">2025</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="section-eyebrow mb-3">Certifications</div>
+        <div class="row g-2">
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fab fa-aws"></i></div><span>AWS Cloud Practitioner</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fab fa-aws"></i></div><span>AWS Solutions Architect (In Progress)</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fab fa-google"></i></div><span>GCP Cloud Digital Leader</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fas fa-cloud"></i></div><span>Oracle Cloud Infrastructure – Foundations</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fas fa-robot"></i></div><span>AI Career Essentials</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fas fa-paint-brush"></i></div><span>Google UX/UI Design</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fas fa-network-wired"></i></div><span>CCNA 1, 2 & 3 – Cisco Academy</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fas fa-network-wired"></i></div><span>HCIA Datacom – Huawei</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fas fa-database"></i></div><span>MySQL / PostgreSQL</span></div>
+          </div>
+          <div class="col-md-6">
+            <div class="cert-card"><div class="cert-icon"><i class="fas fa-tools"></i></div><span>IBT Learning – DevOps Engineering</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT / HIRE -->
+<section id="payment">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="section-eyebrow">Hire Me</div>
+        <h2 class="section-title">Work With Me</h2>
+        <p class="section-sub">Available for freelance projects, consulting, and contract work. Reach out via the contact form or pay directly using any of the methods below.</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2.5rem;text-align:center;">
+          <p style="font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem;font-family:'Space Mono',monospace;">Choose a payment method</p>
+          <div style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
+            <a href="#" onclick="togglePayDetail('mpesa');return false;" class="pay-option-card" id="btn-mpesa">
+              <div style="width:56px;height:56px;border-radius:50%;background:#00a550;display:flex;align-items:center;justify-content:center;margin:0 auto 0.7rem;font-size:1.5rem;color:#fff;"><i class="fas fa-mobile-alt"></i></div>
+              <div style="font-weight:700;font-size:0.88rem;">M-Pesa</div>
+              <div style="font-size:0.72rem;color:var(--muted);margin-top:2px;">Lipa na M-Pesa</div>
+            </a>
+            <a href="#" onclick="togglePayDetail('visa');return false;" class="pay-option-card" id="btn-visa">
+              <div style="width:56px;height:56px;border-radius:50%;background:#1a1f71;display:flex;align-items:center;justify-content:center;margin:0 auto 0.7rem;font-size:1.6rem;color:#fff;"><i class="fab fa-cc-visa"></i></div>
+              <div style="font-weight:700;font-size:0.88rem;">Visa / Card</div>
+              <div style="font-size:0.72rem;color:var(--muted);margin-top:2px;">Debit or Credit</div>
+            </a>
+            <a href="#" onclick="togglePayDetail('paypal');return false;" class="pay-option-card" id="btn-paypal">
+              <div style="width:56px;height:56px;border-radius:50%;background:#009cde;display:flex;align-items:center;justify-content:center;margin:0 auto 0.7rem;font-size:1.5rem;color:#fff;"><i class="fab fa-paypal"></i></div>
+              <div style="font-weight:700;font-size:0.88rem;">PayPal</div>
+              <div style="font-size:0.72rem;color:var(--muted);margin-top:2px;">Instant Transfer</div>
+            </a>
+          </div>
+
+          <!-- M-Pesa Detail -->
+          <div class="pay-detail-panel" id="detail-mpesa">
+            <div style="background:rgba(0,165,80,0.08);border:1px solid rgba(0,165,80,0.25);border-radius:4px;padding:1.5rem;text-align:left;max-width:380px;margin:0 auto;">
+              <div style="font-weight:700;color:#00a550;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;"><i class="fas fa-mobile-alt"></i> Lipa na M-Pesa</div>
+              <div style="font-size:0.88rem;line-height:2.2;color:var(--text);">
+                <div>📲 <span style="color:var(--muted);">Paybill:</span> <strong>4123456</strong></div>
+                <div>🔢 <span style="color:var(--muted);">Account No:</span> <strong>MICHAEL-DEV</strong></div>
+                <div>📞 <span style="color:var(--muted);">Till:</span> <strong>5678901</strong></div>
+                <div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid var(--border);font-size:0.78rem;color:var(--muted);">After payment, send the M-Pesa code to <strong style="color:var(--accent)">+254 728 160 293</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visa Detail -->
+          <div class="pay-detail-panel" id="detail-visa">
+            <div style="background:rgba(26,31,113,0.1);border:1px solid rgba(26,31,113,0.3);border-radius:4px;padding:1.5rem;text-align:center;max-width:380px;margin:0 auto;">
+              <div style="display:flex;align-items:center;justify-content:center;gap:0.8rem;margin-bottom:0.8rem;">
+                <i class="fab fa-cc-visa" style="font-size:2rem;color:#1a1f71;background:#fff;border-radius:4px;padding:2px 8px;"></i>
+                <i class="fab fa-cc-mastercard" style="font-size:2rem;color:#eb001b;"></i>
+              </div>
+              <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">Card payments are processed securely. Contact Michael to get a Stripe payment link sent to your email.</p>
+              <a href="mailto:mikeirungumuturi@gmail.com?subject=Card%20Payment%20Request" class="btn-primary-custom" style="font-size:0.8rem;padding:0.7rem 1.5rem;">
+                <i class="fas fa-envelope me-2"></i>Request Payment Link
+              </a>
+            </div>
+          </div>
+
+          <!-- PayPal Detail -->
+          <div class="pay-detail-panel" id="detail-paypal">
+            <div style="background:rgba(0,156,222,0.08);border:1px solid rgba(0,156,222,0.25);border-radius:4px;padding:1.5rem;text-align:center;max-width:380px;margin:0 auto;">
+              <i class="fab fa-paypal" style="font-size:2.5rem;color:#009cde;display:block;margin-bottom:0.7rem;"></i>
+              <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">Send payment directly via PayPal. Click below to open the payment page.</p>
+              <a href="https://paypal.me/MichaelMuturi" target="_blank" class="btn-primary-custom" style="background:#009cde;font-size:0.8rem;padding:0.7rem 1.5rem;display:inline-block;">
+                <i class="fab fa-paypal me-2"></i>Pay via PayPal
+              </a>
+              <div style="margin-top:0.8rem;font-size:0.75rem;color:var(--muted);">PayPal: <strong style="color:var(--text)">mikeirungumuturi@gmail.com</strong></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .pay-option-card { background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:1.5rem 2rem;text-decoration:none;color:var(--text);transition:all 0.2s;min-width:130px;cursor:pointer;display:inline-block; }
+  .pay-option-card:hover, .pay-option-card.active { border-color:var(--accent);color:var(--text);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,229,255,0.08); }
+  .pay-detail-panel { display:none;margin-top:1.5rem;animation:slideUp 0.3s ease; }
+  .pay-detail-panel.open { display:block; }
+</style>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="section-eyebrow">Contact</div>
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="section-sub mb-4">Open to discussing projects, consulting, or just talking tech.</p>
+        <div class="contact-info">
+          <a href="tel:+254728160293"><i class="fas fa-phone"></i>+254 728 160 293</a>
+          <a href="mailto:mikeirungumuturi@gmail.com"><i class="fas fa-envelope"></i>mikeirungumuturi@gmail.com</a>
+          <a href="mailto:michael.muturi@kra.go.ke"><i class="fas fa-envelope"></i>michael.muturi@kra.go.ke</a>
+          <a href="https://mike-muturi.netlify.app" target="_blank"><i class="fas fa-globe"></i>mike-muturi.netlify.app</a>
+          <a href="https://www.linkedin.com/in/michael-muturi/" target="_blank"><i class="fab fa-linkedin"></i>linkedin.com/in/michael-muturi</a>
+          <a href="https://github.com/Muturi1999" target="_blank"><i class="fab fa-github"></i>github.com/Muturi1999</a>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/Muturi1999" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/michael-muturi/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:mikeirungumuturi@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="contact-form">
+          <!-- EmailJS status banner -->
+          <div id="formStatus" style="display:none;padding:0.9rem 1.2rem;border-radius:3px;margin-bottom:1rem;font-size:0.85rem;font-weight:600;"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+            <input type="text" id="cf_name" placeholder="Your Name" required/>
+            <input type="email" id="cf_email" placeholder="Your Email" required/>
+          </div>
+          <input type="text" id="cf_subject" placeholder="Subject" required/>
+          <textarea id="cf_message" rows="5" placeholder="Tell me about your project..." required></textarea>
+          <button class="btn-primary-custom" id="sendBtn" onclick="sendEmail()">
+            Send Message <i class="fas fa-arrow-right ms-2"></i>
+          </button>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:0.7rem;">
+            <i class="fas fa-lock" style="color:var(--accent);margin-right:4px;"></i>Messages are delivered directly to mikeirungumuturi@gmail.com
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <p>© 2025 Michael Irungu Muturi — All rights reserved</p>
+    <p>Built with HTML, Bootstrap & ❤️ from Nairobi, Kenya 🇰🇪</p>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div id="toast" style="position:fixed;bottom:2rem;right:2rem;background:var(--surface2);border:1px solid var(--accent);border-radius:4px;padding:1rem 1.5rem;color:var(--text);font-size:0.85rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.3s;max-width:320px;"></div>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── EMAILJS INIT ──
+  // Steps to activate:
+  // 1. Sign up free at https://emailjs.com
+  // 2. Create a Gmail service (connect mikeirungumuturi@gmail.com)
+  // 3. Create an email template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
+  // 4. Replace the three placeholder strings below with your real IDs
+  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Account → API Keys
+  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // Email Services tab
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // Email Templates tab
+
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  async function sendEmail() {
+    const name    = document.getElementById('cf_name').value.trim();
+    const email   = document.getElementById('cf_email').value.trim();
+    const subject = document.getElementById('cf_subject').value.trim();
+    const message = document.getElementById('cf_message').value.trim();
+    const btn     = document.getElementById('sendBtn');
+    const status  = document.getElementById('formStatus');
+
+    if (!name || !email || !subject || !message) {
+      showStatus('error', '⚠️ Please fill in all fields before sending.');
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      showStatus('error', '⚠️ Please enter a valid email address.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending…';
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name:  name,
+        from_email: email,
+        subject:    subject,
+        message:    message,
+        reply_to:   email
+      });
+      showStatus('success', '✅ Message sent! Michael will get back to you soon.');
+      document.getElementById('cf_name').value = '';
+      document.getElementById('cf_email').value = '';
+      document.getElementById('cf_subject').value = '';
+      document.getElementById('cf_message').value = '';
+    } catch (err) {
+      showStatus('error', '❌ Sending failed. Please email directly: mikeirungumuturi@gmail.com');
+      console.error('EmailJS error:', err);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = 'Send Message <i class="fas fa-arrow-right ms-2"></i>';
+    }
+  }
+
+  function showStatus(type, msg) {
+    const s = document.getElementById('formStatus');
+    s.textContent = msg;
+    s.style.display = 'block';
+    s.style.background  = type === 'success' ? 'rgba(0,229,255,0.08)' : 'rgba(255,107,53,0.1)';
+    s.style.border      = type === 'success' ? '1px solid rgba(0,229,255,0.3)' : '1px solid rgba(255,107,53,0.3)';
+    s.style.color       = type === 'success' ? 'var(--accent)' : 'var(--accent3)';
+  }
+
+  // ── EXPERIENCE MODAL ──
+  function openExpModal() {
+    document.getElementById('expModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeExpModal() {
+    document.getElementById('expModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('expModal').addEventListener('click', function(e) {
+    if (e.target === this) closeExpModal();
+  });
+
+  function addExperience() {
+    const title   = document.getElementById('exp_title').value.trim();
+    const org     = document.getElementById('exp_org').value.trim();
+    const start   = document.getElementById('exp_start').value.trim();
+    const end     = document.getElementById('exp_end').value.trim() || 'Present';
+    const bullets = document.getElementById('exp_bullets').value.trim();
+
+    if (!title || !org || !start) {
+      alert('Please fill in Job Title, Organisation, and Start Date.');
+      return;
+    }
+
+    const dateRange = end ? `${start} – ${end}` : start;
+    const bulletHTML = bullets
+      ? bullets.split('\n').filter(l => l.trim()).map(l => `<li>${l.replace(/^[•\-\*]\s*/, '')}</li>`).join('')
+      : '';
+
+    const item = document.createElement('div');
+    item.className = 'timeline-item fade-up';
+    item.innerHTML = `
+      <div class="timeline-date">${dateRange}</div>
+      <div class="timeline-org">${org}</div>
+      <h5>${title}</h5>
+      ${bulletHTML ? `<ul>${bulletHTML}</ul>` : ''}
+    `;
+
+    // Prepend to timeline (newest first)
+    const timeline = document.getElementById('experienceTimeline');
+    timeline.insertBefore(item, timeline.firstChild);
+
+    // Trigger animation
+    requestAnimationFrame(() => item.classList.add('visible'));
+
+    // Clear fields and close
+    ['exp_title','exp_org','exp_start','exp_end','exp_bullets'].forEach(id => document.getElementById(id).value = '');
+    closeExpModal();
+    showToast('✅ Experience added to your timeline!');
+  }
+
+  // ── PAYMENT DETAIL PANELS ──
+  function togglePayDetail(method) {
+    const panel = document.getElementById('detail-' + method);
+    const btn   = document.getElementById('btn-' + method);
+    const isOpen = panel.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.pay-detail-panel').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('.pay-option-card').forEach(b => b.classList.remove('active'));
+
+    if (!isOpen) {
+      panel.classList.add('open');
+      btn.classList.add('active');
+    }
+  }
+
+  // ── SCROLL ANIMATIONS ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── PROJECT FILTERING ──
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.dataset.filter;
+      document.querySelectorAll('.project-item').forEach(item => {
+        const cats = item.dataset.category || '';
+        item.classList.toggle('hidden', filter !== 'all' && !cats.includes(filter));
+      });
+    });
+  });
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.transform = 'translateY(0)';
+    t.style.opacity = '1';
+    setTimeout(() => { t.style.transform = 'translateY(100px)'; t.style.opacity = '0'; }, 4000);
+  }
+</script>
+</body>
+</html>
