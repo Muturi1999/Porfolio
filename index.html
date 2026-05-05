@@ -7,6 +7,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨🏾‍💻</text></svg>"/>
   <style>
     :root {
       --bg: #08090d;
@@ -174,7 +175,8 @@
     }
     .hero-stats {
       display: flex;
-      gap: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
       margin-top: 3rem;
       padding-top: 2.5rem;
       border-top: 1px solid var(--border);
@@ -196,6 +198,24 @@
 
     /* ── SECTION COMMONS ── */
     section { padding: 6rem 0; position: relative; z-index: 1; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 767.98px) {
+      section { padding: 3.5rem 0; }
+      #hero { min-height: 100svh; padding: 5rem 0 3rem; }
+      .hero-stats { gap: 1.2rem 2rem; margin-top: 2rem; padding-top: 1.5rem; }
+      .stat-val { font-size: 1.5rem; }
+      .hero-role { font-size: 0.95rem; margin-bottom: 1.8rem; }
+      .section-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+      .contact-name-email { grid-template-columns: 1fr !important; }
+      .skill-bar-wrap { flex-direction: column; gap: 0.4rem; }
+      .timeline { padding-left: 1.25rem; }
+      .timeline-item { padding-bottom: 1.8rem; }
+      .timeline-item::before { left: -1.6rem; width: 8px; height: 8px; }
+      .timeline-item h5 { font-size: 0.95rem; }
+      .timeline-item ul li { font-size: 0.8rem; line-height: 1.5; }
+      footer .container { flex-direction: column; text-align: center; gap: 0.5rem !important; }
+    }
     .section-eyebrow {
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
@@ -322,6 +342,38 @@
       font-size: 3rem;
       position: relative;
       overflow: hidden;
+    }
+    .project-preview-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      transform: none;
+      pointer-events: none;
+      background: #fff;
+    }
+    .project-preview-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+      pointer-events: none;
+      display: block;
+      background: #fff;
+    }
+    .project-preview-label {
+      position: absolute;
+      left: 0.8rem;
+      bottom: 0.8rem;
+      z-index: 1;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 2px;
+      padding: 0.18rem 0.45rem;
     }
     .project-thumb::after {
       content: '';
@@ -764,7 +816,7 @@
         </div>
         <div class="skill-group">
           <div class="skill-group-title">Databases & Integrations</div>
-          <span class="skill-pill">PostgreSQL</span><span class="skill-pill">MongoDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">M-Pesa Daraja API</span><span class="skill-pill">Banking APIs</span><span class="skill-pill">iTax Integration</span>
+          <span class="skill-pill">PostgreSQL</span><span class="skill-pill">MongoDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">Supabase</span><span class="skill-pill">Firebase</span><span class="skill-pill">M-Pesa Daraja API</span><span class="skill-pill">Banking APIs</span><span class="skill-pill">iTax Integration</span>
         </div>
         <div class="skill-group">
           <div class="skill-group-title">Architecture & Tools</div>
@@ -795,13 +847,16 @@
 
       <!-- KESRA Student Portal -->
       <div class="col-md-6 col-lg-4 project-item" data-category="web">
-        <div class="project-card">
-          <div class="project-thumb" style="background:linear-gradient(135deg,#0d1f3c,#1a3a6b);">🎓</div>
+        <div class="project-card" role="link" tabindex="0" onclick="window.open('https://www.kesra.ac.ke/','_blank','noopener,noreferrer')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.open('https://www.kesra.ac.ke/','_blank','noopener,noreferrer');}">
+          <div class="project-thumb" style="background:#0d1f3c;">
+            <iframe class="project-preview-frame" src="https://www.kesra.ac.ke/" title="KESRA Website Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">Live Preview</span>
+          </div>
           <div class="project-body">
-            <div class="project-tags"><span class="project-tag">Django</span><span class="project-tag">Python</span><span class="project-tag">KRA</span></div>
+            <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript (jQuery)</span></div>
             <h5>KESRA Student Portal</h5>
             <p>Student enrollment, fee management, document submission platform with backend integration to core KRA systems at Kenya School of Revenue Administration.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="https://www.kesra.ac.ke/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -814,7 +869,7 @@
             <div class="project-tags"><span class="project-tag">Django</span><span class="project-tag">REST API</span><span class="project-tag">KRA</span></div>
             <h5>Compliance Document Sharing Platform</h5>
             <p>Secure internal knowledge sharing and document archiving system enabling cross-departmental collaboration at KRA (Level 1).</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="project-link" onclick="event.preventDefault();showToast('🚀 Coming soon!')">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -827,7 +882,7 @@
             <div class="project-tags"><span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">iTax</span></div>
             <h5>M-Service PAYE Filing Module</h5>
             <p>Mobile PAYE filing with statutory deductions, insurance relief, PWD exemptions, bulk PAYE filing, and real-time iTax validation.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="project-link" onclick="event.preventDefault();showToast('🚀 Coming soon!')">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -835,25 +890,31 @@
       <!-- D&E BPR System -->
       <div class="col-md-6 col-lg-4 project-item" data-category="web">
         <div class="project-card">
-          <div class="project-thumb" style="background:linear-gradient(135deg,#2e1a0a,#6b3d1a);">⚖️</div>
+          <div class="project-thumb" style="background:#2e1a0a;">
+            <iframe class="project-preview-frame" src="https://itax.kra.go.ke/KRA-Portal/" title="iTax Website Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">iTax Preview</span>
+          </div>
           <div class="project-body">
-            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Workflow</span><span class="project-tag">KRA</span></div>
+            <div class="project-tags"><span class="project-tag">Architecture</span><span class="project-tag">Java Spring Boot</span><span class="project-tag">KRA</span></div>
             <h5>Debt & Enforcement BPR System</h5>
             <p>Lead engineer for automated tax enforcement workflows — translating complex debt recovery policies into digital operations.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="https://itax.kra.go.ke/KRA-Portal/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
 
       <!-- County Revenue -->
       <div class="col-md-6 col-lg-4 project-item" data-category="web">
-        <div class="project-card">
-          <div class="project-thumb" style="background:linear-gradient(135deg,#0a1f2e,#1a4f6b);">💰</div>
+        <div class="project-card" role="link" tabindex="0" onclick="window.open('https://kiambu.countyerp.co.ke/','_blank','noopener,noreferrer')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.open('https://kiambu.countyerp.co.ke/','_blank','noopener,noreferrer');}">
+          <div class="project-thumb" style="background:#0a1f2e;">
+            <iframe class="project-preview-frame" src="https://kiambu.countyerp.co.ke/" title="Kiambu County Website Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">Kiambu Preview</span>
+          </div>
           <div class="project-body">
-            <div class="project-tags"><span class="project-tag">Docker</span><span class="project-tag">Django</span><span class="project-tag">County Gov</span></div>
+            <div class="project-tags"><span class="project-tag">Dart</span><span class="project-tag">Flutter</span><span class="project-tag">Docker</span><span class="project-tag">PostgreSQL</span></div>
             <h5>County Revenue Management System</h5>
             <p>Improved revenue collection efficiency by 30% for Kiambu County. Containerized with Docker, reducing deployment time by 40%.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="https://kiambu.countyerp.co.ke/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -866,7 +927,7 @@
             <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Next.js</span><span class="project-tag">ICT Authority</span></div>
             <h5>Konza OSS Platform</h5>
             <p>Enhanced platform serving 10,000+ users with 25% operational efficiency increase at Konza Technopolis smart city.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="project-link" onclick="event.preventDefault();showToast('🚀 Coming soon!')">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -874,12 +935,15 @@
       <!-- Silicon Savannah Appstore -->
       <div class="col-md-6 col-lg-4 project-item" data-category="web">
         <div class="project-card">
-          <div class="project-thumb" style="background:linear-gradient(135deg,#2e0a2a,#6b1a65);">🛒</div>
+          <div class="project-thumb" style="background:#2e0a2a;">
+            <iframe class="project-preview-frame" src="https://konza.go.ke/" title="Konza Website Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">Konza Preview</span>
+          </div>
           <div class="project-body">
-            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">PostgreSQL</span></div>
+            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Python</span><span class="project-tag">Django</span></div>
             <h5>Silicon Savannah Appstore</h5>
             <p>App marketplace platform for Konza Technopolis — increased platform engagement by 30%.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="https://konza.go.ke/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -892,7 +956,7 @@
             <div class="project-tags"><span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Konza</span></div>
             <h5>City Food App</h5>
             <p>Smart city food distribution mobile app reducing turnaround time by 20% at Konza Technopolis.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="project-link" onclick="event.preventDefault();showToast('🚀 Coming soon!')">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -900,12 +964,15 @@
       <!-- e-Baraza -->
       <div class="col-md-6 col-lg-4 project-item" data-category="web mobile">
         <div class="project-card">
-          <div class="project-thumb" style="background:linear-gradient(135deg,#0a2e2e,#1a6b6b);">🗣️</div>
+          <div class="project-thumb" style="background:#0a2e2e;">
+            <img class="project-preview-image" src="https://image.thum.io/get/width/1200/https://ebaraza.konza.go.ke/" alt="e-Baraza Preview" loading="lazy" />
+            <span class="project-preview-label">e-Baraza Preview</span>
+          </div>
           <div class="project-body">
-            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Flutter</span><span class="project-tag">GovTech</span></div>
+            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">GovTech</span><span class="project-tag">Docker</span></div>
             <h5>e-Baraza Citizen Feedback</h5>
             <p>Digital citizen feedback platform co-developed at ICT Authority — improved feedback access by 15%.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="https://ebaraza.konza.go.ke/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -918,7 +985,7 @@
             <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">Django</span><span class="project-tag">Kiambu County</span></div>
             <h5>Fleet Management System</h5>
             <p>UI/UX design and development for county fleet scheduling and tracking system using Figma and Django backend.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="project-link" onclick="event.preventDefault();showToast('🚀 Coming soon!')">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -931,7 +998,7 @@
             <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Automation</span><span class="project-tag">ICT Authority</span></div>
             <h5>Media Monitoring Tool</h5>
             <p>Automated media monitoring platform improving monitoring operations efficiency by 30% at ICT Authority.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="project-link" onclick="event.preventDefault();showToast('🚀 Coming soon!')">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -944,7 +1011,87 @@
             <div class="project-tags"><span class="project-tag">Kubernetes</span><span class="project-tag">Terraform</span><span class="project-tag">Jenkins</span></div>
             <h5>Cloud-Native CI/CD Infrastructure</h5>
             <p>End-to-end DevOps pipeline with Kubernetes orchestration, Terraform IaC, Jenkins CI/CD, Prometheus monitoring on AWS & GCP.</p>
-            <a href="https://github.com/Muturi1999" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="project-link" onclick="event.preventDefault();showToast('🚀 Coming soon!')">Visit Site <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yote Market -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:#1a1a0a;">
+            <iframe class="project-preview-frame" src="https://yotemarket.com/login" title="Yote Market Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">Yote Market Preview</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Node.js</span><span class="project-tag">MongoDB</span><span class="project-tag">Vue.js</span><span class="project-tag">M-Pesa Integration</span></div>
+            <h5>Yote Market</h5>
+            <p>Ecommerce platform focused on online product discovery, login-based access, M-Pesa payment integration, and streamlined digital shopping experiences.</p>
+            <a href="https://yotemarket.com/login" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guava Store -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card" role="link" tabindex="0" onclick="window.open('http://guavastore.malipopopote.solutions/','_blank','noopener,noreferrer')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.open('http://guavastore.malipopopote.solutions/','_blank','noopener,noreferrer');}">
+          <div class="project-thumb" style="background:#0f1f2b;">
+            <iframe class="project-preview-frame" src="http://guavastore.malipopopote.solutions/" title="Guava Store Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">Guava Store Preview</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Next.js</span><span class="project-tag">Django</span><span class="project-tag">M-Pesa Integration</span></div>
+            <h5>Guava Store</h5>
+            <p>Ecommerce web platform for product browsing, secure sign-in, M-Pesa payment integration, and streamlined online purchasing workflows.</p>
+            <a href="http://guavastore.malipopopote.solutions/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SpotLetting -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card">
+          <div class="project-thumb" style="background:#1f2230;">
+            <img class="project-preview-image" src="https://image.thum.io/get/width/1200/https://spotletting.com/" alt="SpotLetting Preview" loading="lazy" />
+            <span class="project-preview-label">SpotLetting Preview</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">Rental Platform</span><span class="project-tag">Web</span></div>
+            <h5>SpotLetting</h5>
+            <p>Simplify Rental Management for Free!</p>
+            <a href="https://spotletting.com/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- County ERP -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card" role="link" tabindex="0" onclick="window.open('https://countyerp.com/','_blank','noopener,noreferrer')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.open('https://countyerp.com/','_blank','noopener,noreferrer');}">
+          <div class="project-thumb" style="background:#0d1e2c;">
+            <iframe class="project-preview-frame" src="https://countyerp.com/" title="County ERP Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">Live Preview</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">ERP</span><span class="project-tag">Django</span><span class="project-tag">React</span><span class="project-tag">PostgreSQL</span><span class="project-tag">County Gov</span></div>
+            <h5>County ERP Platform</h5>
+            <p>Enterprise resource planning platform for county governments — streamlining revenue collection, financial management, procurement, and service delivery across multiple counties.</p>
+            <a href="https://countyerp.com/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SeeTrafix -->
+      <div class="col-md-6 col-lg-4 project-item" data-category="web">
+        <div class="project-card" role="link" tabindex="0" onclick="window.open('https://seetrafix.netlify.app/','_blank','noopener,noreferrer')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.open('https://seetrafix.netlify.app/','_blank','noopener,noreferrer');}">
+          <div class="project-thumb" style="background:#0a1a2e;">
+            <iframe class="project-preview-frame" src="https://seetrafix.netlify.app/" title="SeeTrafix Preview" loading="lazy"></iframe>
+            <span class="project-preview-label">Live Preview</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Netlify</span><span class="project-tag">Traffic</span></div>
+            <h5>SeeTrafix</h5>
+            <p>Real-time traffic monitoring and route visibility platform — helping users see and navigate traffic conditions with a clean, fast web interface.</p>
+            <a href="https://seetrafix.netlify.app/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Site <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -961,15 +1108,12 @@
         <div class="section-eyebrow">Experience</div>
         <h2 class="section-title">Where I've<br>Worked</h2>
         <p class="section-sub">Government and enterprise environments across Kenya's digital transformation landscape.</p>
-        <button class="btn-primary-custom mt-4" onclick="openExpModal()" style="display:inline-flex;align-items:center;gap:0.5rem;">
-          <i class="fas fa-plus"></i> Add Experience
-        </button>
       </div>
       <div class="col-lg-8">
         <div class="timeline" id="experienceTimeline">
 
           <div class="timeline-item fade-up">
-            <div class="timeline-date">Feb 2025 – Feb 2026</div>
+            <div class="timeline-date">Feb 2025 – Present</div>
             <div class="timeline-org">Kenya Revenue Authority (KRA)</div>
             <h5>Software Engineer – Special Assignment</h5>
             <ul>
@@ -1020,55 +1164,7 @@
   </div>
 </section>
 
-<!-- ADD EXPERIENCE MODAL -->
-<div id="expModal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
-  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;margin:1rem;animation:slideUp 0.3s ease;">
-    <div style="padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
-      <h5 style="margin:0;font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:0.5rem;">
-        <span style="color:var(--accent)"><i class="fas fa-briefcase"></i></span> Add New Experience
-      </h5>
-      <button onclick="closeExpModal()" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;line-height:1;">&times;</button>
-    </div>
-    <div style="padding:1.5rem 2rem;">
-      <div style="margin-bottom:1rem;">
-        <label class="form-label-custom">Job Title *</label>
-        <input type="text" id="exp_title" class="form-control-custom" placeholder="e.g. Senior Software Engineer"/>
-      </div>
-      <div style="margin-bottom:1rem;">
-        <label class="form-label-custom">Organisation / Company *</label>
-        <input type="text" id="exp_org" class="form-control-custom" placeholder="e.g. Safaricom PLC"/>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
-        <div>
-          <label class="form-label-custom">Start Date *</label>
-          <input type="text" id="exp_start" class="form-control-custom" placeholder="e.g. Jan 2026"/>
-        </div>
-        <div>
-          <label class="form-label-custom">End Date</label>
-          <input type="text" id="exp_end" class="form-control-custom" placeholder="e.g. Present"/>
-        </div>
-      </div>
-      <div style="margin-bottom:1.5rem;">
-        <label class="form-label-custom">Key Responsibilities / Achievements</label>
-        <textarea id="exp_bullets" class="form-control-custom" rows="5" placeholder="• One bullet point per line&#10;• e.g. Built API integration with M-Pesa Daraja&#10;• e.g. Reduced deployment time by 40%"></textarea>
-        <div style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;">Each line will be displayed as a separate bullet point.</div>
-      </div>
-      <div style="display:flex;gap:0.8rem;">
-        <button class="btn-primary-custom" onclick="addExperience()" style="flex:1;text-align:center;">
-          <i class="fas fa-plus me-2"></i>Add to Timeline
-        </button>
-        <button onclick="closeExpModal()" style="background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.85rem 1.5rem;border-radius:2px;cursor:pointer;font-size:0.85rem;font-weight:700;letter-spacing:0.05em;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--muted)'" onmouseout="this.style.borderColor='var(--border)'">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-<style>
-  @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-  #expModal.open { display:flex !important; }
-  .form-control-custom { background:var(--surface); border:1px solid var(--border); border-radius:2px; color:var(--text); padding:0.75rem 1rem; font-size:0.88rem; width:100%; outline:none; transition:border-color 0.2s; margin-bottom:0; font-family:'Syne',sans-serif; resize:vertical; }
-  .form-control-custom:focus { border-color:var(--accent); }
-  .form-control-custom::placeholder { color:var(--muted); }
-</style>
+
 
 <!-- CERTIFICATIONS -->
 <section id="certifications">
@@ -1237,8 +1333,6 @@
         <div class="contact-info">
           <a href="tel:+254728160293"><i class="fas fa-phone"></i>+254 728 160 293</a>
           <a href="mailto:mikeirungumuturi@gmail.com"><i class="fas fa-envelope"></i>mikeirungumuturi@gmail.com</a>
-          <a href="mailto:michael.muturi@kra.go.ke"><i class="fas fa-envelope"></i>michael.muturi@kra.go.ke</a>
-          <a href="https://mike-muturi.netlify.app" target="_blank"><i class="fas fa-globe"></i>mike-muturi.netlify.app</a>
           <a href="https://www.linkedin.com/in/michael-muturi/" target="_blank"><i class="fab fa-linkedin"></i>linkedin.com/in/michael-muturi</a>
           <a href="https://github.com/Muturi1999" target="_blank"><i class="fab fa-github"></i>github.com/Muturi1999</a>
         </div>
@@ -1252,7 +1346,7 @@
         <div class="contact-form">
           <!-- EmailJS status banner -->
           <div id="formStatus" style="display:none;padding:0.9rem 1.2rem;border-radius:3px;margin-bottom:1rem;font-size:0.85rem;font-weight:600;"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+          <div class="contact-name-email" style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
             <input type="text" id="cf_name" placeholder="Your Name" required/>
             <input type="email" id="cf_email" placeholder="Your Email" required/>
           </div>
@@ -1273,7 +1367,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
-    <p>© 2025 Michael Irungu Muturi — All rights reserved</p>
+    <p>© 2026 Michael Irungu Muturi — All rights reserved</p>
     <p>Built with HTML, Bootstrap & ❤️ from Nairobi, Kenya 🇰🇪</p>
   </div>
 </footer>
@@ -1286,16 +1380,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 <script>
   // ── EMAILJS INIT ──
-  // Steps to activate:
-  // 1. Sign up free at https://emailjs.com
-  // 2. Create a Gmail service (connect mikeirungumuturi@gmail.com)
-  // 3. Create an email template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
-  // 4. Replace the three placeholder strings below with your real IDs
-  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Account → API Keys
-  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // Email Services tab
-  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // Email Templates tab
+  const EMAILJS_PUBLIC_KEY  = 'JEi_zygLEddhT7NTd';
+  const EMAILJS_SERVICE_ID  = 'portfolio';
+  const EMAILJS_TEMPLATE_ID = 'template_4a502mb';
 
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY,
+  });
 
   async function sendEmail() {
     const name    = document.getElementById('cf_name').value.trim();
@@ -1331,7 +1422,8 @@
       document.getElementById('cf_subject').value = '';
       document.getElementById('cf_message').value = '';
     } catch (err) {
-      showStatus('error', '❌ Sending failed. Please email directly: mikeirungumuturi@gmail.com');
+      const detail = err?.text || err?.message || JSON.stringify(err);
+      showStatus('error', `❌ Sending failed (${detail}). Please email directly: mikeirungumuturi@gmail.com`);
       console.error('EmailJS error:', err);
     } finally {
       btn.disabled = false;
@@ -1348,57 +1440,7 @@
     s.style.color       = type === 'success' ? 'var(--accent)' : 'var(--accent3)';
   }
 
-  // ── EXPERIENCE MODAL ──
-  function openExpModal() {
-    document.getElementById('expModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeExpModal() {
-    document.getElementById('expModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.getElementById('expModal').addEventListener('click', function(e) {
-    if (e.target === this) closeExpModal();
-  });
 
-  function addExperience() {
-    const title   = document.getElementById('exp_title').value.trim();
-    const org     = document.getElementById('exp_org').value.trim();
-    const start   = document.getElementById('exp_start').value.trim();
-    const end     = document.getElementById('exp_end').value.trim() || 'Present';
-    const bullets = document.getElementById('exp_bullets').value.trim();
-
-    if (!title || !org || !start) {
-      alert('Please fill in Job Title, Organisation, and Start Date.');
-      return;
-    }
-
-    const dateRange = end ? `${start} – ${end}` : start;
-    const bulletHTML = bullets
-      ? bullets.split('\n').filter(l => l.trim()).map(l => `<li>${l.replace(/^[•\-\*]\s*/, '')}</li>`).join('')
-      : '';
-
-    const item = document.createElement('div');
-    item.className = 'timeline-item fade-up';
-    item.innerHTML = `
-      <div class="timeline-date">${dateRange}</div>
-      <div class="timeline-org">${org}</div>
-      <h5>${title}</h5>
-      ${bulletHTML ? `<ul>${bulletHTML}</ul>` : ''}
-    `;
-
-    // Prepend to timeline (newest first)
-    const timeline = document.getElementById('experienceTimeline');
-    timeline.insertBefore(item, timeline.firstChild);
-
-    // Trigger animation
-    requestAnimationFrame(() => item.classList.add('visible'));
-
-    // Clear fields and close
-    ['exp_title','exp_org','exp_start','exp_end','exp_bullets'].forEach(id => document.getElementById(id).value = '');
-    closeExpModal();
-    showToast('✅ Experience added to your timeline!');
-  }
 
   // ── PAYMENT DETAIL PANELS ──
   function togglePayDetail(method) {
@@ -1421,6 +1463,20 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── PROJECT ORDER (PREVIEWS FIRST) ──
+  const projectsGrid = document.getElementById('projectsGrid');
+  if (projectsGrid) {
+    const items = [...projectsGrid.querySelectorAll('.project-item')];
+    items
+      .sort((a, b) => {
+        const aHasPreview = !!a.querySelector('.project-preview-frame, .project-preview-image');
+        const bHasPreview = !!b.querySelector('.project-preview-frame, .project-preview-image');
+        if (aHasPreview === bHasPreview) return 0;
+        return aHasPreview ? -1 : 1;
+      })
+      .forEach(item => projectsGrid.appendChild(item));
+  }
 
   // ── PROJECT FILTERING ──
   document.querySelectorAll('.filter-btn').forEach(btn => {
